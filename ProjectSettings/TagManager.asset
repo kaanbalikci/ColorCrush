@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Colors
+  - Child
+  - Point
   layers:
   - Default
   - TransparentFX
@@ -38,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 1685850525
+    locked: 0
+  - name: PlayArea
+    uniqueID: 2732184089
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
