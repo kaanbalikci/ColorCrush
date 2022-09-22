@@ -27,19 +27,12 @@ public class ColorScript : MonoBehaviour
 
     private void Update()
     {     
+        //if check same color is true, add this object to spritelist for control how many color in a group
         if (SpriteManager.SM.spriteList.IndexOf(this.gameObject) < 0 && isCheckSameColor == true)
         {
             SpriteManager.SM.spriteList.Add(this.gameObject);
         }
-        /*else if(isCheckSameColor == false)
-        {
-            SpriteManager.SM.spriteList.Remove(this.gameObject);
-        }*/
 
-        /*if (SpriteManager.SM.spriteList.Contains(this.gameObject))
-        {
-            isCheckSameColor = false;
-        }*/
 
     }
 
@@ -49,13 +42,8 @@ public class ColorScript : MonoBehaviour
         {
 
 
-           /* if(collision.name == this.name)
-            {
-                canCrush = true;
-            }*/
-
             
-
+            //add this object colorlist we control this game with colorlist
             if (SpriteManager.SM.spriteList.Contains(this.gameObject))
             {
                 if(collision.name == this.name && SpriteManager.SM.spriteList.IndexOf(collision.gameObject) < 0)
@@ -64,35 +52,16 @@ public class ColorScript : MonoBehaviour
                 }
             }
 
+            //if touch this object start this 
             if(isRemove == true)
             {
+                //if this obj touch same color, all same color setactive false
                 if (collision.name == this.name)
                 {
                     UIManager.UI.goodJobUI.SetActive(true);
                     UIManager.UI.goodJobTextUI.SetActive(true);
                     collision.GetComponent<ColorScript>().isRemove = true;
                     StartCoroutine(CloseThis());
-                    //SpriteManager.SM.colorList.Remove(this.gameObject);
-                    
-                    //GameObject newObj = ObjectPool.OP.GetObject();
-
-
-                    /*if (newObj != null)
-                    {
-                        newObj.SetActive(true);
-                        newObj.transform.position = new Vector2(holdPos.x, holdPos.y + 5.4f);
-                        
-                    }*/
-                    
-                    
-                    
-                    
-                    
-                    //this.gameObject.SetActive(false);
-
-                    //this.transform.position = new Vector2(transform.position.x, transform.position.y + 5.4f);
-                    //this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    //this.gameObject.SetActive(true);
                     
 
                 }
@@ -108,7 +77,6 @@ public class ColorScript : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         this.gameObject.SetActive(false);
-        
         
     }
 

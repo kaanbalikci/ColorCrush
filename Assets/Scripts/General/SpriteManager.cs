@@ -23,6 +23,7 @@ public class SpriteManager : MonoBehaviour
     public static event Action<int> UpdateMove;
     public int moveCount;
 
+
     public bool isCountinue;
 
     public int controlNumber = 0;
@@ -36,33 +37,19 @@ public class SpriteManager : MonoBehaviour
 
     private void Start()
     {
-        //pointList[0].GetComponent<PointsScript>().isColorChange = true;
+        
         isCountinue = true;
     }
 
     void Update()
     {
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            Vector2 ray = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(ray, Vector2.zero);
-
-            if (hit.collider != null)
-            {
-                if (hit.collider.CompareTag("Colors"))
-                {
-                    SpriteManager.SM.moveCount--;
-                    hit.collider.GetComponent<ColorScript>().isRemove = true;
-                    //hit.collider.gameObject.SetActive(false);
-                    ColorStateManager.CSM.switchIdle = true;
-                }
-            }
-        }*/
 
 
-
+        //observer 
         UpdateMove?.Invoke(moveCount);
 
+
+        //If click color it will spawn upside
         for (int i = 0; i < ObjectPool.OP.pool.Count; i++)
         {
             if (ObjectPool.OP.pool[i].activeInHierarchy == false)
@@ -86,10 +73,10 @@ public class SpriteManager : MonoBehaviour
    
 
 
-
+        //how many colors in a group
         if (isCountinue == true && controlNumber < 49 && colorList.Count > 0)
         {
-            //spriteList.Clear();
+          
             
             isCountinue = false;
             
@@ -98,107 +85,14 @@ public class SpriteManager : MonoBehaviour
             StartCoroutine(SetSpriteTimer());
 
 
-            /*if (colorList[controlNumber].GetComponent<ColorScript>().isCheckSameColor == false)
-            {
-                
-                
-            }
-            else
-            {
-                controlNumber++;
-            }*/
 
         }
-        /*if (spriteList.Count > 1)
-        {
-            StartCoroutine(SetSpriteTimer());
-        }*/
 
 
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-
-            /*for (int i = 0; i < colorList.Count; i++)
-            {
-                if(colorList[i].GetComponent<ColorScript>().isCheckSameColor == false)
-                {
-                    colorList[i].GetComponent<ColorScript>().isCheckSameColor = true;
-                    Thread.Sleep(1000);
-                }
-
-                for (int j = 0; j < colorList.Count; j++)
-                {
-                    if(colorList[j].GetComponent<ColorScript>().isCheckSameColor == true)
-                    {
-                        spriteList.Add(colorList[j].gameObject);
-                    }
-                }
-                SetSprite();
-                ColorScript.CS.isCheckSameColor = false;
-            }*/
-            //colorList[0].GetComponent<ColorScript>().isCheckSameColor = true;
-            /*for (int i = 0; i < 1; i++)
-            {
-                if (colorList[i].GetComponent<ColorScript>().isCheckSameColor == false)
-                {
-                    colorList[i].GetComponent<ColorScript>().isCheckSameColor = true;
-                }
-                else
-                {
-                    continue;
-                }
-
-                for (int j = 0; j < colorList.Count; j++)
-                {
-                    if (colorList[j].GetComponent<ColorScript>().isCheckSameColor == true)
-                    {
-                        spriteList.Add(colorList[j].gameObject);
-                    }
-                }
-            }*/
-
-
-        
-
-           
-            //SetSprite();
-            //ColorScript.CS.isCheckSameColor = false;
-
-
-
-
-
-
-
-
-
-
-
-            /*for (int i = 0; i < pointList.Count; i++)
-            {
-                Debug.Log("2");
-                pointList[i].GetComponent<PointsScript>().isColorChange = true;
-
-                for (int j = 0; j < pointList.Count; j++)
-                {
-                    if (pointList[j].GetComponent<PointsScript>().isColorChange == true)
-                    {
-                        if (spriteList.IndexOf(pointList[j].gameObject) < 0)
-                        {
-                            spriteList.Add(pointList[j].gameObject);
-                            Debug.Log("1");
-                        }
-                    }
-                }
-                SetSprite();
-                //spriteList.Clear();
-                clearAll = true;
-            }*/
-        }
         
     }
 
+    // SET NEW SPRITE
     private void SetSprite()
     {
         if(spriteList.Count != 0)
@@ -339,7 +233,9 @@ public class SpriteManager : MonoBehaviour
 
     private IEnumerator SetSpriteTimer()
     {
+
         yield return new WaitForSeconds(0.05f);
+        //how many color in group control loop
         for (int i = 0; i < colorList.Count; i++)
         {
             if(colorList[i].GetComponent<ColorScript>().isCheckSameColor == true)
@@ -347,6 +243,7 @@ public class SpriteManager : MonoBehaviour
                 spriteList.Add(colorList[i]);
             }
         }
+        //clear this loop
         if(controlNumber < colorList.Count)
         {
             colorList[controlNumber].GetComponent<ColorScript>().isCheckSameColor = false;

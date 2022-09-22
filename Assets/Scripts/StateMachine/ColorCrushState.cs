@@ -24,6 +24,7 @@ public class ColorCrushState : ColorBaseState
 
     public override IEnumerator StartState(ColorStateManager color)
     {
+        // if start game wait control number 
         if(SpriteManager.SM.moveCount == 0)
         {
             yield return new WaitForSeconds(1.4f);
@@ -31,6 +32,8 @@ public class ColorCrushState : ColorBaseState
             yield return new WaitForSeconds(2.6f);
             color.SwitchState(color.finishState);
         }
+
+        //these are starting control
         if(SpriteManager.SM.moveCount != 0)
         {
             if (SpriteManager.SM.moveCount == 11)
